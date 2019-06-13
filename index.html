@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <title>Sports Quiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<header>
+    <h1>Sports Quiz</h1>
+    <img src="sports-icons.gif" alt="Picture that represents multiple sports"/>
+</header>
+
+<body>
+    <section>
+        <div class="container">
+            <form id="start-quiz">
+                <button type="submit">Start Quiz</button>
+            </form>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div id="score" class="questionTracking">
+                <p>Score: 0</p>
+            </div>
+            <div id="questionsAsked" class="questionTracking">
+                <p>Questions: 1/10</p>
+            </div>
+            <form class="questions">
+                <h2>Question</h2>
+                <div>
+                    <label class="answerOption">
+                        <input type="radio" name="answer" id="1" value="1" required>
+                        <span>answerOption</span>
+                    </label>
+                </div>
+                <div>
+                    <label class="answerOption">
+                        <input type="radio" name="answer" id="2" value="2" required>
+                        <span>answerOption</span>
+                    </label>
+                </div>
+                <div>
+                    <label class="answerOption">
+                        <input type="radio" name="answer" id="3" value="3" required>
+                        <span>answerOption</span>
+                    </label>
+                </div>
+                <div>
+                    <label class="answerOption">
+                        <input type="radio" name="answer" id="4" value="4" required>
+                        <span>answerOption</span>
+                    </label>
+                </div>
+                <div>
+                    <button type="submit">Submit Answer</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
