@@ -14,14 +14,14 @@
 </header>
 
 <body>
-    <section>
+    <section class="startQuiz">
         <div class="container">
             <form id="start-quiz">
                 <button type="submit">Start Quiz</button>
             </form>
         </div>
     </section>
-    <section>
+    <section class="quizSection">
         <div class="container">
             <div id="score" class="questionTracking">
                 <p>Score: 0</p>
@@ -30,34 +30,36 @@
                 <p>Questions: 1/10</p>
             </div>
             <form class="questions">
-                <h2>Question</h2>
-                <div>
+                <h3>Question</h3>
+                <fieldset>
                     <label class="answerOption">
                         <input type="radio" name="answer" id="1" value="1" required>
                         <span>answerOption</span>
                     </label>
-                </div>
-                <div>
                     <label class="answerOption">
                         <input type="radio" name="answer" id="2" value="2" required>
                         <span>answerOption</span>
                     </label>
-                </div>
-                <div>
                     <label class="answerOption">
                         <input type="radio" name="answer" id="3" value="3" required>
                         <span>answerOption</span>
                     </label>
-                </div>
-                <div>
                     <label class="answerOption">
                         <input type="radio" name="answer" id="4" value="4" required>
                         <span>answerOption</span>
                     </label>
-                </div>
+                </fieldset>
                 <div>
                     <button type="submit">Submit Answer</button>
                 </div>
+            </form>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <p>Answer to question</p>
+            <form class="nextQuestion">
+                <button type="submit">Next Question</button>
             </form>
         </div>
     </section>
