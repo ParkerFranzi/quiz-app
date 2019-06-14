@@ -3,7 +3,6 @@
     
 <head>
     <title>Sports Quiz</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
@@ -15,22 +14,22 @@
 </header>
 
 <body>
-    <section class="startQuiz">
+    <section id="start">
         <div class="container">
-            <form id="start-quiz">
+            <form id="startQuiz">
                 <button type="submit">Start Quiz</button>
             </form>
         </div>
     </section>
-    <section class="quizSection">
+    <section id="quizSection">
         <div class="container">
             <div id="score" class="questionTracking">
                 <p>Score: 0</p>
             </div>
             <div id="questionsAsked" class="questionTracking">
-                <p>Questions: 1/10</p>
+                <p>Question: 1/10</p>
             </div>
-            <form class="questions">
+            <form id="questions">
                 <h3>Question</h3>
                 <fieldset>
                     <label class="answerOption">
@@ -56,19 +55,23 @@
             </form>
         </div>
     </section>
-    <section class="answer">
-        <div class="container">
+    <section id="answer">
+        <div id ="questionFeedback" class="container">
             <p>Answer to question</p>
-            <form class="nextQuestion">
+            <form id="nextQuestion">
                 <button type="submit">Next Question</button>
             </form>
         </div>
     </section>
-    <section class="finished">
+    <section id="finished">
         <div class="container">
             <div class="feedback">Congrats you got 8 right</div>
-            <button type="submit">Try again?</button>
+            <form id="playAgain">
+                <button type="submit">Try again?</button>
+            </form>
         </div>
     </section>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="index.js"></script>
 </body>
 </html>

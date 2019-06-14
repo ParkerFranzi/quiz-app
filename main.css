@@ -21,3 +21,6 @@ header img {
     margin: auto;
     text-align: center;
 }
+.hidden {
+    display: none;
+}
