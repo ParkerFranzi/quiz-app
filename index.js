@@ -4,28 +4,28 @@ let questionNum = 0;
 
 const STORE = [
     {
-        question: "What golf major did Tiger Woods win first?",
+        question: "What golf major did Tiger Woods set a record of winning by 15 strokes?",
         answerPool: ["US Open", "PGA Championship", "Masters", "The Open Championship"],
-        answer: "Masters",
-        answerInfo: "Tiger Woods won his first major at the 1997 Masters tournament and won by 12 strokes over runner up Tom Kite.",
+        answer: "US Open",
+        answerInfo: "Tiger Woods holds the record for largest margin of victory by 15 strokes in the 2000 US Open",
     },
     {
         question: "What golf major did Tiger Woods win to snap an 11 year major drought?",
-        answerPool: ["Masters", "US Open", "PGA Championship", "The Open Championship"],
+        answerPool: ["US Open", "PGA Championship", "Masters", "The Open Championship"],
         answer: "Masters",
         answerInfo: "Tiger Woods won the 2019 Masters tournament to snap an 11 year drought while overcoming a 2 stroke deficit going into the last day to win by 1.",
     },
     {
-        question: "How many championships did Michael Jordan win after returning from baseball?",
-        answerPool: ["0", "1", "2", "3"],
-        answer: "3",
-        answerInfo: "After returning to the NBA from baseball in the middle of the 1994-1995 season, Jordan would lead his team to 3 consecutive NBA championships in the 95-96, 96-97, and 97-98 seasons.",
+        question: "How many championships did Michael Jordan win?",
+        answerPool: ["4", "5", "6", "7"],
+        answer: "6",
+        answerInfo: "Between 1991 and 1998 Michael Jordan led the Chicago Bulls to 6 NBA championships while taking a year off to play baseball in between",
     },
     {
-        question: "How many teams drafted players before Michael Jordan in the 1984 NBA draft?",
-        answerPool: ["0", "1", "2", "3"],
-        answer: "2",
-        answerInfo: "The Houston Rockets picked first and chose Akeem Olajuwon and the Portland Trailblazers picked Sam Bowie second before Michael Jordan was drafted by the Chicago Bulls third.",
+        question: "Which team traded the number 2 pick in the 1984 NBA draft that could have landed them Michael Jordan?",
+        answerPool: ["Houston Rockets", "Indiana Pacers", "Utah Jazz", "Portland Trailblazers"],
+        answer: "Indiana Pacers",
+        answerInfo: "The Indiana Pacers traded their number 2 pick to the Portland Trailblazers who picked Sam Bowie second before Michael Jordan was drafted by the Chicago Bulls third.",
     },
     {
         question: "Who is the only athlete to play in both a Super Bowl and World Series?",
@@ -47,7 +47,7 @@ const STORE = [
     },
     {
         question: "What pick was Tom Brady in the 2000 NFL draft?",
-        answerPool: ["1", "19", "127", "199"],
+        answerPool: ["9", "19", "127", "199"],
         answer: "199",
         answerInfo: "Tom Brady was selected with pick number 199, a compensatory pick, in the sixth round of the 2000 NFL Draft.",
     },
@@ -62,11 +62,12 @@ const STORE = [
         answerPool: ["19", "32", "43", "54"],
         answer: "32",
         answerInfo: "If Michael Phelps was a country, he'd be ranked 32nd on the all-time medal count. That's all-time, as in everything a country has won in 120 years and 28 Summer Olympics.",
-    },
+    }, 
 ]
 
 function generateQuestion(qNum) {
     console.log(STORE[qNum].question);
+    $("#quizSection").removeClass("hidden");
     $("#questions").html(`
     <h3>${STORE[qNum].question}</h3>
     <fieldset>
@@ -122,7 +123,7 @@ function nextQuestion() {
         console.log("next question ready");
         
         questionNum += 1;
-        console.log(STORE.length);
+        questionsAsked(questionNum);
         generateQuestion(questionNum);
         submitAnswer(questionNum);
         
@@ -134,28 +135,42 @@ function submitAnswer(qNum) {
     $("#questions").submit(function(event) {
         event.preventDefault();
         $("#answer").removeClass("hidden");
-        console.log(STORE[qNum].answer)
-        if ($('input[type="radio"]:checked').val() === STORE[qNum].answer) {
+        let selected = $('input:checked').val();
+        console.log(selected);
+        if (selected === STORE[qNum].answer) {
             console.log("right answer");
+            
+            console.log(STORE[qNum].answer);
             score += 1;
+            console.log(score);
             if (qNum === STORE.length - 1) {
+                
                 questionFeedbackRightLast(qNum);
-                computeScore();
+                computeScore(score);
+                seeResults();
+                
+
             }
             else {
                 questionFeedbackRight(qNum);
+                computeScore(score);
                 nextQuestion();
+
             }
         }
         else {
             console.log("wrong answer");
             if (qNum === STORE.length - 1) {
                 questionFeedbackWrongLast(qNum)
-                computeScore();
+                computeScore(score);
+                seeResults();
+
             }
             else {
                 questionFeedbackWrong(qNum);
+                computeScore(score);
                 nextQuestion();
+
             }
         }
         
@@ -163,6 +178,7 @@ function submitAnswer(qNum) {
 }
 
 function questionFeedbackRight(qNum) {
+    $("#answer").removeClass("hidden");
     $("#questionFeedback").html(`
         <h3>Correct! ${STORE[qNum].answer}</h3>
         <p>${STORE[qNum].answerInfo}</p>
@@ -172,6 +188,7 @@ function questionFeedbackRight(qNum) {
     `)
 }
 function questionFeedbackRightLast(qNum) {
+    $("#answer").removeClass("hidden");
     $("#questionFeedback").html(`
         <h3>Correct! ${STORE[qNum].answer}</h3>
         <p>${STORE[qNum].answerInfo}</p>
@@ -181,6 +198,7 @@ function questionFeedbackRightLast(qNum) {
     `)
 }
 function questionFeedbackWrong(qNum) {
+    $("#answer").removeClass("hidden");
     $("#questionFeedback").html(`
         <h3>Incorrect! The correct answer is ${STORE[qNum].answer}</h3>
         <p>${STORE[qNum].answerInfo}</p>
@@ -190,6 +208,7 @@ function questionFeedbackWrong(qNum) {
     `)
 }
 function questionFeedbackWrongLast(qNum) {
+    $("#answer").removeClass("hidden");
     $("#questionFeedback").html(`
         <h3>Incorrect! The correct answer is ${STORE[qNum].answer}</h3>
         <p>${STORE[qNum].answerInfo}</p>
@@ -198,11 +217,44 @@ function questionFeedbackWrongLast(qNum) {
         </form>
     `)
 }
-function questionNumber() {
+function computeScore(num) {
+    $("#score").html(`<p>Score: ${num}</p>`)
+}
+function questionsAsked(qNum) {
+    $("#questionsAsked").html(`<p>Question: ${qNum + 1}/${STORE.length}</p>`)
+}
+function seeResults() {
+    $("#seeResults").submit(function(event){
+        event.preventDefault();
+        finalResult();
+    })
+}
+function finalResult() {
+    console.log("finalResult ran");
+    if (score > 8) {
+        $("#finished").html(`
+            <div class="container">
+                <p class="feedback">Congratulations you got ${score} right.</p>
+                <form id="playAgain">
+                    <button type="submit">Play again?</button>
+                </form>
+            </div>
+        `)
+    }
+    else {
+        $("#finished").html(`
+            <div class="container">
+                <p class="feedback">You got ${score} right.</p>
+                <form id="playAgain">
+                    <button type="submit">Play again?</button>
+                </form>
+            </div>
+        `) 
+    }
 
 }
-function computeScore() {
-    console.log("score screen");
+function removeCheck() {
+    $('input[name="answer"]').prop('checked', false);
 }
 function handleQuiz() {
     startQuiz();
