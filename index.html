@@ -3,6 +3,7 @@
     
 <head>
     <title>Sports Quiz</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
@@ -55,12 +56,18 @@
             </form>
         </div>
     </section>
-    <section>
+    <section class="answer">
         <div class="container">
             <p>Answer to question</p>
             <form class="nextQuestion">
                 <button type="submit">Next Question</button>
             </form>
+        </div>
+    </section>
+    <section class="finished">
+        <div class="container">
+            <div class="feedback">Congrats you got 8 right</div>
+            <button type="submit">Try again?</button>
         </div>
     </section>
 </body>
