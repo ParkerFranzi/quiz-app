@@ -137,6 +137,7 @@ function submitAnswer(qNum) {
         $("#answer").removeClass("hidden");
         let selected = $('input:checked').val();
         console.log(selected);
+        $('input:checked').parent().toggleClass("picked");
         if (selected === STORE[qNum].answer) {
             console.log("right answer");
             
