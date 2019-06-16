@@ -185,7 +185,7 @@ function questionFeedbackRight(qNum) {
     $("#questionFeedback").html(`
         <h3>Correct! ${STORE[qNum].answer}</h3>
         <p>${STORE[qNum].answerInfo}</p>
-        <form id="nextQuestion">
+        <form id="nextQuestion" class="buttonSubmit">
             <button type="submit">Next Question</button>
         </form>
     `)
@@ -195,7 +195,7 @@ function questionFeedbackRightLast(qNum) {
     $("#questionFeedback").html(`
         <h3>Correct! ${STORE[qNum].answer}</h3>
         <p>${STORE[qNum].answerInfo}</p>
-        <form id="seeResults">
+        <form id="seeResults" class="buttonSubmit">
             <button type="submit">Results</button>
         </form>
     `)
@@ -205,7 +205,7 @@ function questionFeedbackWrong(qNum) {
     $("#questionFeedback").html(`
         <h3>Incorrect! The correct answer is ${STORE[qNum].answer}</h3>
         <p>${STORE[qNum].answerInfo}</p>
-        <form id="nextQuestion">
+        <form id="nextQuestion" class="buttonSubmit">
             <button type="submit">Next Question</button>
         </form>
     `)
@@ -215,7 +215,7 @@ function questionFeedbackWrongLast(qNum) {
     $("#questionFeedback").html(`
         <h3>Incorrect! The correct answer is ${STORE[qNum].answer}</h3>
         <p>${STORE[qNum].answerInfo}</p>
-        <form id="seeResults">
+        <form id="seeResults" class="buttonSubmit">
             <button type="submit">See Results</button>
         </form>
     `)
@@ -240,7 +240,7 @@ function finalResult() {
         $("#finished").html(`
             <div class="container">
                 <p class="feedback">Congratulations you got <b>${score}</b> right.</p>
-                <form id="playAgain">
+                <form id="playAgain" class="buttonSubmit">
                     <button type="submit">Play again?</button>
                 </form>
             </div>
@@ -250,7 +250,7 @@ function finalResult() {
         $("#finished").html(`
             <div class="container">
                 <p class="feedback">You got <b>${score}</b> right.</p>
-                <form id="playAgain">
+                <form id="playAgain" class="buttonSubmit">
                     <button type="submit">Play again?</button>
                 </form>
             </div>
