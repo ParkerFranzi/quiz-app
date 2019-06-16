@@ -62,7 +62,7 @@ const STORE = [
         answerPool: ["19", "32", "43", "54"],
         answer: "32",
         answerInfo: "If Michael Phelps was a country, he'd be ranked 32nd on the all-time medal count. That's all-time, as in everything a country has won in 120 years and 28 Summer Olympics.",
-    }, 
+    },
 ]
 
 function generateQuestion(qNum) {
@@ -88,8 +88,8 @@ function generateQuestion(qNum) {
             <span>${STORE[qNum].answerPool[3]}</span>
         </label>
     </fieldset>
-        <div>
-            <button type="submit">Submit Answer</button>
+        <div class="buttonSubmit">
+            <button type="submit">Submit</button>
         </div>
     </form>
     `
@@ -102,6 +102,8 @@ function startQuiz() {
         $("#start").toggleClass("hidden");
         score = 0;
         questionNum = 0;
+        computeScore(score);
+        questionsAsked(questionNum);
         generateQuestion(questionNum);
         submitAnswer(questionNum);
     })
@@ -137,7 +139,7 @@ function submitAnswer(qNum) {
         $("#answer").removeClass("hidden");
         let selected = $('input:checked').val();
         console.log(selected);
-        $('input:checked').parent().toggleClass("picked");
+        
         if (selected === STORE[qNum].answer) {
             console.log("right answer");
             
@@ -194,7 +196,7 @@ function questionFeedbackRightLast(qNum) {
         <h3>Correct! ${STORE[qNum].answer}</h3>
         <p>${STORE[qNum].answerInfo}</p>
         <form id="seeResults">
-            <button type="submit">See Results</button>
+            <button type="submit">Results</button>
         </form>
     `)
 }
@@ -219,10 +221,10 @@ function questionFeedbackWrongLast(qNum) {
     `)
 }
 function computeScore(num) {
-    $("#score").html(`<p>Score: ${num}</p>`)
+    $("#score").html(`<p>Score: <b>${num}</b></p>`)
 }
 function questionsAsked(qNum) {
-    $("#questionsAsked").html(`<p>Question: ${qNum + 1}/${STORE.length}</p>`)
+    $("#questionsAsked").html(`<p>Question: <b>${qNum + 1}/${STORE.length}</b></p>`)
 }
 function seeResults() {
     $("#seeResults").submit(function(event){
@@ -232,10 +234,12 @@ function seeResults() {
 }
 function finalResult() {
     console.log("finalResult ran");
-    if (score > 8) {
+    $("#finished").removeClass("hidden");
+    $("#answer").addClass("hidden");
+    if ((score / questionNum) >= .8 ) {
         $("#finished").html(`
             <div class="container">
-                <p class="feedback">Congratulations you got ${score} right.</p>
+                <p class="feedback">Congratulations you got <b>${score}</b> right.</p>
                 <form id="playAgain">
                     <button type="submit">Play again?</button>
                 </form>
@@ -245,7 +249,7 @@ function finalResult() {
     else {
         $("#finished").html(`
             <div class="container">
-                <p class="feedback">You got ${score} right.</p>
+                <p class="feedback">You got <b>${score}</b> right.</p>
                 <form id="playAgain">
                     <button type="submit">Play again?</button>
                 </form>
@@ -254,9 +258,7 @@ function finalResult() {
     }
 
 }
-function removeCheck() {
-    $('input[name="answer"]').prop('checked', false);
-}
+
 function handleQuiz() {
     startQuiz();
     nextQuestion();
