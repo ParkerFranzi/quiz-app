@@ -99,7 +99,8 @@ function startQuiz() {
     $("#startQuiz").submit(function(event) {
         event.preventDefault();
         console.log('`startQuiz` ran');
-        $("#start").toggleClass("hidden");
+        $("#start").addClass("hidden");
+        $("#introImg").addClass("hidden-resp");
         score = 0;
         questionNum = 0;
         computeScore(score);
@@ -183,6 +184,12 @@ function submitAnswer(qNum) {
 function questionFeedbackRight(qNum) {
     $("#answer").removeClass("hidden");
     $("#questionFeedback").html(`
+        <div id="score" class="questionTracking">
+            <p>Score: <b>${score}</b></p>
+        </div>
+        <div id="questionsAsked" class="questionTracking">
+            <p>Question: <b>${qNum + 1}/${STORE.length}</b></p>
+        </div>
         <h3>Correct! ${STORE[qNum].answer}</h3>
         <p>${STORE[qNum].answerInfo}</p>
         <form id="nextQuestion" class="buttonSubmit">
@@ -203,6 +210,12 @@ function questionFeedbackRightLast(qNum) {
 function questionFeedbackWrong(qNum) {
     $("#answer").removeClass("hidden");
     $("#questionFeedback").html(`
+        <div id="score" class="questionTracking">
+            <p>Score: <b>${score}</b></p>
+        </div>
+        <div id="questionsAsked" class="questionTracking">
+            <p>Question: <b>${qNum + 1}/${STORE.length}</b></p>
+        </div>
         <h3>Incorrect! The correct answer is ${STORE[qNum].answer}</h3>
         <p>${STORE[qNum].answerInfo}</p>
         <form id="nextQuestion" class="buttonSubmit">

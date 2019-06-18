@@ -11,7 +11,7 @@
 
 <header>
     <h1>Sports Quiz</h1>
-    <img src="sports-icons.gif" alt="Picture that represents multiple sports"/>
+    <img id="introImg" src="sports-icons.gif" alt="Picture that represents multiple sports"/>
 </header>
 
 <body>
@@ -58,6 +58,12 @@
     </section>
     <section id="answer" class="hidden">
         <div id ="questionFeedback" class="container">
+            <div id="score" class="questionTracking">
+                <p>Score: <b>0</b></p>
+            </div>
+            <div id="questionsAsked" class="questionTracking">
+                <p>Question: <b>1/10</b></p>
+            </div>
             <p>Answer to question</p>
             <form id="nextQuestion" class="buttonSubmit">
                 <button type="submit">Next Question</button>
