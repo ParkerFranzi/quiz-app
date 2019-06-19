@@ -66,7 +66,6 @@ const STORE = [
 ]
 
 function generateQuestion(qNum) {
-    console.log(STORE[qNum].question);
     $("#quizSection").removeClass("hidden");
     $("#questions").html(`
     <h3>${STORE[qNum].question}</h3>
@@ -98,7 +97,6 @@ function generateQuestion(qNum) {
 function startQuiz() {
     $("#startQuiz").submit(function(event) {
         event.preventDefault();
-        console.log('`startQuiz` ran');
         $("#start").addClass("hidden");
         $("#introImg").addClass("hidden-resp");
         score = 0;
@@ -110,9 +108,8 @@ function startQuiz() {
     })
 }
 function playAgain() {
-    $("#playAgain").submit(function(event) {
+    $("#playAgain").off('submit').submit(function(event) {
         event.preventDefault();
-        console.log('`playAgain` ran');
         score = 0;
         questionNum = 0;
         generateQuestion(questionNum);
@@ -120,61 +117,46 @@ function playAgain() {
     })   
 }
 function nextQuestion() {
-    $("#nextQuestion").submit(function(event) {
+    $("#nextQuestion").off('submit').submit(function(event) {
         event.preventDefault();
         $("#answer").addClass("hidden");
-        console.log("next question ready");
-        
+        $("#questions").removeClass("hidden");
         questionNum += 1;
         questionsAsked(questionNum);
         generateQuestion(questionNum);
         submitAnswer(questionNum);
-        
-
-        
     })
 }
 function submitAnswer(qNum) {
-    $("#questions").submit(function(event) {
+    $("#questions").off('submit').submit(function(event) {
         event.preventDefault();
         $("#answer").removeClass("hidden");
+        $("#questions").addClass("hidden");
         let selected = $('input:checked').val();
-        console.log(selected);
         
         if (selected === STORE[qNum].answer) {
-            console.log("right answer");
-            
-            console.log(STORE[qNum].answer);
             score += 1;
-            console.log(score);
             if (qNum === STORE.length - 1) {
-                
                 questionFeedbackRightLast(qNum);
                 computeScore(score);
                 seeResults();
-                
-
             }
             else {
                 questionFeedbackRight(qNum);
                 computeScore(score);
                 nextQuestion();
-
             }
         }
         else {
-            console.log("wrong answer");
             if (qNum === STORE.length - 1) {
                 questionFeedbackWrongLast(qNum)
                 computeScore(score);
                 seeResults();
-
             }
             else {
                 questionFeedbackWrong(qNum);
                 computeScore(score);
                 nextQuestion();
-
             }
         }
         
@@ -240,13 +222,12 @@ function questionsAsked(qNum) {
     $("#questionsAsked").html(`<p>Question: <b>${qNum + 1}/${STORE.length}</b></p>`)
 }
 function seeResults() {
-    $("#seeResults").submit(function(event){
+    $("#seeResults").off('submit').submit(function(event){
         event.preventDefault();
         finalResult();
     })
 }
 function finalResult() {
-    console.log("finalResult ran");
     $("#finished").removeClass("hidden");
     $("#answer").addClass("hidden");
     if ((score / questionNum) >= .8 ) {
@@ -269,7 +250,6 @@ function finalResult() {
             </div>
         `) 
     }
-
 }
 
 function handleQuiz() {
