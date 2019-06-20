@@ -95,7 +95,7 @@ function generateQuestion(qNum) {
     )
 }
 function startQuiz() {
-    $("#startQuiz").submit(function(event) {
+    $("#startQuiz").off('submit').submit(function(event) {
         event.preventDefault();
         $("#start").addClass("hidden");
         $("#introImg").addClass("hidden-resp");
